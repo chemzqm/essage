@@ -269,13 +269,11 @@ Essage.prototype._class = function(classname, isRemove) {\n\
   return el;\n\
 };\n\
 \n\
-Essage.prototype.set = function(message) {\n\
+Essage.prototype.set = function(opts) {\n\
 \n\
-  message = typeof message === 'string' ? { message: message } : message;\n\
-\n\
-  // copy for each message\n\
+  // copy for each opts\n\
   this.config = Utils.copy({}, this.defaults);\n\
-  this.config = Utils.copy(this.config, message);\n\
+  this.config = Utils.copy(this.config, opts);\n\
 \n\
   // placement check\n\
   !this.config.placement.match(/^(?:top|bottom)$/) && (this.config.placement = 'top');\n\
@@ -290,22 +288,23 @@ Essage.prototype.set = function(message) {\n\
   return this;\n\
 };\n\
 \n\
-Essage.prototype.show = function(message, duration) {\n\
+Essage.prototype.show = function(message, opts) {\n\
   var el = this.el\n\
-    , self = this.set(message)\n\
+    , self = this.set(opts)\n\
     , interval, timeout;\n\
 \n\
+  opts = opts || {};\n\
   // set message\n\
-  el.innerHTML = this.close + this.config.message;\n\
+  el.innerHTML = this.close + message;\n\
 \n\
   var top = -this._height();\n\
 \n\
   // disppear automaticlly\n\
   if(this._timeout) clearTimeout(this._timeout);\n\
-  duration && (timeout = function() {\n\
+  opts.timeout && (timeout = function() {\n\
     return setTimeout(function() {\n\
       self.hide();\n\
-    }, duration);\n\
+    }, opts.timeout);\n\
   });\n\
 \n\
   interval = setInterval(function() {\n\
