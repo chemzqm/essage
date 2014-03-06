@@ -88,23 +88,21 @@ Essage.show({
   };
 
   $auto.onclick = function() {
-    Essage.show({
-      message: 'the message will automaticlly disppear after 2 seconds...',
-      status: 'warning'
-    }, 2000);
+    Essage.show('the message will automaticlly disppear after 2 seconds...', {
+      status: 'warning',
+      timeout: 2000
+    });
   };
 
   $bottom.onclick = function() {
-    Essage.show({
-      message: 'hi, hi, im here',
+    Essage.show( 'hi, hi, im here', {
       placement: 'bottom',
       status: 'error'
     });
   };
 
   $status.onclick = function() {
-    Essage.show({
-      message: 'o:, classname is changed.',
+    Essage.show( 'o:, classname is changed.', {
       status: 'success'
     });
   };
