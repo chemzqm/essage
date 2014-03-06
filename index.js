@@ -67,13 +67,11 @@ Essage.prototype._class = function(classname, isRemove) {
   return el;
 };
 
-Essage.prototype.set = function(message) {
+Essage.prototype.set = function(opts) {
 
-  message = typeof message === 'string' ? { message: message } : message;
-
-  // copy for each message
+  // copy for each opts
   this.config = Utils.copy({}, this.defaults);
-  this.config = Utils.copy(this.config, message);
+  this.config = Utils.copy(this.config, opts);
 
   // placement check
   !this.config.placement.match(/^(?:top|bottom)$/) && (this.config.placement = 'top');
@@ -88,22 +86,23 @@ Essage.prototype.set = function(message) {
   return this;
 };
 
-Essage.prototype.show = function(message, duration) {
+Essage.prototype.show = function(message, opts) {
   var el = this.el
-    , self = this.set(message)
+    , self = this.set(opts)
     , interval, timeout;
 
+  opts = opts || {};
   // set message
-  el.innerHTML = this.close + this.config.message;
+  el.innerHTML = this.close + message;
 
   var top = -this._height();
 
   // disppear automaticlly
   if(this._timeout) clearTimeout(this._timeout);
-  duration && (timeout = function() {
+  opts.timeout && (timeout = function() {
     return setTimeout(function() {
       self.hide();
-    }, duration);
+    }, opts.timeout);
   });
 
   interval = setInterval(function() {
