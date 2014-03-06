@@ -1,0 +1,19 @@
+{
+  "name": "essage",
+  "repo": "chemzqm/essage",
+  "description": "an elegant way to show message / tips",
+  "version": "0.0.1",
+  "keywords": ["tip", "notification"],
+  "dependencies": {
+  },
+  "development": {
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ],
+  "styles": [
+    "essage.css"
+  ]
+}
