@@ -291,7 +291,7 @@ Essage.prototype.set = function(opts) {\n\
 Essage.prototype.show = function(message, opts) {\n\
   var el = this.el\n\
     , self = this.set(opts)\n\
-    , interval, timeout;\n\
+    , timeout;\n\
 \n\
   opts = opts || {};\n\
   // set message\n\
@@ -306,8 +306,9 @@ Essage.prototype.show = function(message, opts) {\n\
       self.hide();\n\
     }, opts.timeout);\n\
   });\n\
+  if (this.interval) clearInterval(this.interval);\n\
 \n\
-  interval = setInterval(function() {\n\
+  var interval = this.interval = setInterval(function() {\n\
     if(top === 0) {\n\
       self._timeout = timeout && timeout();\n\
       return clearInterval(interval);\n\
@@ -321,10 +322,11 @@ Essage.prototype.show = function(message, opts) {\n\
 Essage.prototype.hide = function() {\n\
   var top = +this.el.style[this.config.placement].slice(0, -2)\n\
     , dest = -this._height()\n\
-    , self = this\n\
-    , interval;\n\
+    , self = this;\n\
 \n\
-  interval = setInterval(function() {\n\
+  if (this.interval) clearInterval(this.interval);\n\
+\n\
+  var interval = this.interval = setInterval(function() {\n\
     if(top === dest) return interval && clearInterval(interval);\n\
     self.el.style[self.config.placement] = (top -= 1) + 'px';\n\
   }, 3);\n\
