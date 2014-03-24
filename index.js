@@ -89,7 +89,7 @@ Essage.prototype.set = function(opts) {
 Essage.prototype.show = function(message, opts) {
   var el = this.el
     , self = this.set(opts)
-    , interval, timeout;
+    , timeout;
 
   opts = opts || {};
   // set message
@@ -104,8 +104,9 @@ Essage.prototype.show = function(message, opts) {
       self.hide();
     }, opts.timeout);
   });
+  if (this.interval) clearInterval(this.interval);
 
-  interval = setInterval(function() {
+  var interval = this.interval = setInterval(function() {
     if(top === 0) {
       self._timeout = timeout && timeout();
       return clearInterval(interval);
@@ -119,10 +120,11 @@ Essage.prototype.show = function(message, opts) {
 Essage.prototype.hide = function() {
   var top = +this.el.style[this.config.placement].slice(0, -2)
     , dest = -this._height()
-    , self = this
-    , interval;
+    , self = this;
 
-  interval = setInterval(function() {
+  if (this.interval) clearInterval(this.interval);
+
+  var interval = this.interval = setInterval(function() {
     if(top === dest) return interval && clearInterval(interval);
     self.el.style[self.config.placement] = (top -= 1) + 'px';
   }, 3);

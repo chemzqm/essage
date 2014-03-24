@@ -34,7 +34,7 @@ options:
   - `placement` the placement can be `top` or `bottom`, by default is `top`.
   - `status` could be `info` `warning` `success` `error` would add class `essage-[status]` container.
 
-### Editable.hide()
+### Essage.hide()
 
 Hide the message.
 

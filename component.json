@@ -2,7 +2,7 @@
   "name": "essage",
   "repo": "chemzqm/essage",
   "description": "an elegant way to show message / tips",
-  "version": "0.0.1",
+  "version": "0.03",
   "keywords": ["tip", "notification"],
   "dependencies": {
   },
