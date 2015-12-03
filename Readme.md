@@ -3,6 +3,8 @@
   Component fork of [sofish/essage](https://github.com/sofish/essage) with API changed.
 
   [demo](http://chemzqm.github.io/essage/)
+  
+  Deprecated not maintained any more
 
 ## Installation
 
